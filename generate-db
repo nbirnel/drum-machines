@@ -4,10 +4,10 @@ db_do() {
     sqlite3 percussion.db "$@"
 }
 
-db_do 'create table notes (C3_convention, ASA_Yamaha, KeyNum INTEGER, Pitch FLOAT);'
+db_do 'create table notes (C3_convention, ASA_Yamaha, KeyNum INTEGER, Frequency FLOAT);'
 db_do '.import notes notes'
 
 for i in percussion_*; do
-    db_do "$(printf 'create table %s(Keynum INTEGER, Sound);\n' $i)"
+    db_do "$(printf 'create table %s(KeyNum INTEGER, Sound);\n' $i)"
     db_do "$(printf '.import %s %s\n' $i $i)"
 done
